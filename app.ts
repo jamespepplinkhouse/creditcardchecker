@@ -1,3 +1,5 @@
+/// <reference path="./typings/index.d.ts"/>
+
 const fs = require('fs')
 const _ = require('lodash')
 
