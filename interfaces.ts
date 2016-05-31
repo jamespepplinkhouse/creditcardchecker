@@ -1,0 +1,3 @@
+interface UnitOfWork {
+  data: string[]
+}
