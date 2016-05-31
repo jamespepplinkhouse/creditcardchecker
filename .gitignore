@@ -40,3 +40,4 @@ data/output_credit_cards.txt
 
 # All javascript files
 *.js
+js/

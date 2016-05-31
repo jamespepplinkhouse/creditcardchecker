@@ -4,13 +4,27 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run compile && mocha js/**/*.spec.js",
+    "test-quick": "mocha js/**/*.spec.js",
+    "test-watch": "npm run compile && mocha js/**/*.spec.js -w",
+    "start": "node js/app.js",
+    "debug": "DEBUG=*.ts node js/app.js",
+    "compile": "npm run lint && rm -rf js/* && tsc --sourcemap -p ts/",
+    "lint": "tslint 'ts/**/*.ts'"
   },
-  "author": "",
+  "author": "JP",
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.11.2",
     "node-worker-pool": "^3.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
+    "mocha": "^2.4.5",
+    "ts-node": "^0.7.1",
+    "tslint": "^3.7.0",
+    "typescript": "^1.8.9",
+    "typescript-require": "^0.2.9-1"
   }
 }

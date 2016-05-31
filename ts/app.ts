@@ -1,8 +1,8 @@
-// / <reference path='./typings/index.d.ts'/>
+/// <reference path="../typings/index.d.ts"/>
 
 const fs = require('fs')
 const os = require('os')
-var _ = require('lodash')
+import * as _ from 'lodash'
 const WorkerPool = require('node-worker-pool')
 
 const inputStream = fs.createReadStream('data/input_credit_cards.txt')
@@ -14,7 +14,7 @@ const numberOfWorkers = os.cpus().length
 const workerPool = new WorkerPool(
   numberOfWorkers,
   process.execPath, // path to the node binary
-  [ './lib/worker.js' ], // arguments array
+  [ './js/lib/worker.js' ], // arguments array
   {
     initData: {someUsefulConstant: 42} // initData is sent exactly once to each worker on startup
   }
