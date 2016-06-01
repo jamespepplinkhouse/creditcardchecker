@@ -16,7 +16,7 @@ To try a larger input data set (3,310,000 cards) there is a file at: ./data/inpu
 - Processes cards in chunks in multiple Node.js processes to use all CPU cores
 
 *My observations with the large data set:*
-- Much faster than the [Elixir solution](https://github.com/jamespepplinkhouse/creditcardchecker) (~18 seconds for Node.js vs ~46 seconds for Elixir) although both can be optimised further
+- Much faster than the [Elixir solution](https://github.com/jamespepplinkhouse/creditcardchecker-elixir) (~18 seconds for Node.js vs ~46 seconds for Elixir) although both can be optimised further
 - Higher memory usage than the Erlang VM (~614MB on my machine)
 - Node.js reaches 100% CPU very quickly, I think due to streaming the file very quickly
 - This was my first attempt at solving a CPU bound problem with Node.js and it was made easy thanks to [node-worker-pool](https://www.npmjs.com/package/node-worker-pool) with relatively little boiler plate code
