@@ -6,6 +6,7 @@ import * as _ from 'lodash'
 const WorkerPool = require('node-worker-pool')
 
 const inputStream = fs.createReadStream('data/input_credit_cards.txt')
+// const inputStream = fs.createReadStream('data/input_credit_cards_large.txt')
 inputStream.setEncoding('utf8')
 
 const outputStream = fs.createWriteStream('data/output_credit_cards.txt')
@@ -23,13 +24,13 @@ const workerPool = new WorkerPool(
 let chunkCount = 0
 let chunksProcessing = 0
 
-inputStream.on('data', async (chunk) => {
+inputStream.on('data', async (chunk: string) => {
   chunkCount++
   chunksProcessing++
 
-  let unitOfWork: UnitOfWork = { data: chunk.split('\n') }
+  let cards: any = _(chunk).split('\n').filter((x) => { return x !== '' })
+  let unitOfWork: UnitOfWork = { data: cards }
   let reply: UnitOfWork = await workerPool.sendMessage(unitOfWork)
-  console.log('reply', reply)
   outputStream.write(_.join(reply.data, '\n'))
   chunksProcessing--
 
