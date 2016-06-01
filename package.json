@@ -12,8 +12,8 @@
     "compile": "npm run lint && rm -rf js/* && tsc --sourcemap -p ts/",
     "lint": "tslint 'ts/**/*.ts'"
   },
-  "author": "JP",
-  "license": "ISC",
+  "author": "James Pepplinkhouse",
+  "license": "MIT",
   "dependencies": {
     "lodash": "^4.11.2",
     "node-worker-pool": "^3.0.2"

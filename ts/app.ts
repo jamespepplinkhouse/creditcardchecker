@@ -42,6 +42,6 @@ inputStream.on('data', async (chunk: string) => {
   }
 })
 
-inputStream.on('end', async () => {
+inputStream.on('end', () => {
   console.log(`Finished processing input stream with ${chunkCount} chunks`)
 })
