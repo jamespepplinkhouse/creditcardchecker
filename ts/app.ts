@@ -5,8 +5,8 @@ const os = require('os')
 import * as _ from 'lodash'
 const WorkerPool = require('node-worker-pool')
 
-const inputStream = fs.createReadStream('data/input_credit_cards.txt')
-// const inputStream = fs.createReadStream('data/input_credit_cards_large.txt')
+// const inputStream = fs.createReadStream('data/input_credit_cards.txt')
+const inputStream = fs.createReadStream('data/input_credit_cards_large.txt')
 inputStream.setEncoding('utf8')
 
 const outputStream = fs.createWriteStream('data/output_credit_cards.txt')
