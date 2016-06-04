@@ -23,8 +23,8 @@ function luhn(card) {
       current = (current * 2)
         .toString()
         .split('')
-        .reduce(function(previous, current, index, array) {
-          return (parseInt(previous, 10) + parseInt(current, 10)).toString()
+        .reduce(function(prev, curr, idx, arr) {
+          return (parseInt(prev, 10) + parseInt(curr, 10)).toString()
         })
     }
     return previous + parseInt(current, 10)
