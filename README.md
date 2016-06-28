@@ -2,6 +2,8 @@
 
 This program validates and identifies credit card numbers by consuming an input file which has one credit card number per line. It writes the results into an output file with one credit card per line. This program is optimised for parsing large files as quickly as possible (it will use all CPU cores at 100%). Try this for a quick way to build and test the program:
 ```
+npm install typescript -g
+npm install typings -g
 npm install
 npm start
 ```
