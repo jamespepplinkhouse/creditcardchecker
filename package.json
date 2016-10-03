@@ -12,12 +12,12 @@
   "author": "James Pepplinkhouse",
   "license": "MIT",
   "dependencies": {
-    "@types/lodash": "4.14.36",
-    "@types/node": "6.0.41",
-    "lodash": "4.16.2",
-    "node-worker-pool": "3.0.2"
+    "node-worker-pool": "3.0.2",
+    "ramda": "^0.22.1"
   },
   "devDependencies": {
+    "@types/node": "6.0.41",
+    "@types/ramda": "0.0.1",
     "rimraf": "2.5.2",
     "tslint": "3.15.1",
     "typescript": "2.0.3"

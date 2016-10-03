@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import * as R from 'ramda'
 
 // Test cases:
 //    VISA: 4111111111111111 (valid)
@@ -11,9 +11,9 @@ import * as _ from 'lodash'
 //    Unknown: 9111111111111111 (invalid)
 
 export function validateCards(cards: string[]): string[] {
-  return _.map(cards, (x) => {
+  return R.map((x) => {
     return `${determineCardType(x)}: ${x} (${luhn(x) ? 'valid' : 'invalid'})`
-  })
+  }, cards)
 }
 
 function luhn(card) {

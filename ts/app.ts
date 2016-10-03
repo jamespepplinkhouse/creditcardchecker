@@ -1,7 +1,10 @@
+/// <reference path="../node_modules/@types/ramda/ramda.d.ts"/>
+/// <reference path="../node_modules/@types/node/index.d.ts"/>
+
 console.time('program')
 const fs = require('fs')
 const os = require('os')
-import * as _ from 'lodash'
+import * as R from 'ramda'
 const WorkerPool = require('node-worker-pool')
 
 const inputStream = fs.createReadStream(process.argv[2], { encoding: 'utf8' })
@@ -24,10 +27,11 @@ inputStream.on('data', async (chunk: string) => {
   chunkCount++
   chunksProcessing++
 
-  let cards: any = _(chunk).split('\n').filter((x) => { return x !== '' })
+  let cards: string[] = R.filter(R.pipe(R.isEmpty, R.not),  R.split('\n', chunk))
   let message: Message = { data: cards }
   let reply: Message = await workerPool.sendMessage(message)
-  outputStream.write(_.join(reply.data, '\n'))
+
+  outputStream.write(R.join('\n', reply.data))
   chunksProcessing--
 
   if (chunksProcessing === 0) {
