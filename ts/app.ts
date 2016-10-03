@@ -4,9 +4,7 @@ const os = require('os')
 import * as _ from 'lodash'
 const WorkerPool = require('node-worker-pool')
 
-const inputStream = fs.createReadStream(process.argv[2])
-inputStream.setEncoding('utf8')
-
+const inputStream = fs.createReadStream(process.argv[2], { encoding: 'utf8' })
 const outputStream = fs.createWriteStream(process.argv[3])
 
 const numberOfWorkers = os.cpus().length
@@ -27,8 +25,8 @@ inputStream.on('data', async (chunk: string) => {
   chunksProcessing++
 
   let cards: any = _(chunk).split('\n').filter((x) => { return x !== '' })
-  let unitOfWork: UnitOfWork = { data: cards }
-  let reply: UnitOfWork = await workerPool.sendMessage(unitOfWork)
+  let message: Message = { data: cards }
+  let reply: Message = await workerPool.sendMessage(message)
   outputStream.write(_.join(reply.data, '\n'))
   chunksProcessing--
 

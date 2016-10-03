@@ -1,3 +1,3 @@
-interface UnitOfWork {
+interface Message {
   data: string[]
 }
