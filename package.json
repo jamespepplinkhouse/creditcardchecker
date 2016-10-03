@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "time \"NODE_ENV=production node js/app.js\"",
+    "start": "NODE_ENV=production node js/app.js",
     "debug": "DEBUG=*.ts node js/app.js",
     "compile": "npm run lint && rimraf js/* && tsc --sourcemap -p ts/",
     "lint": "tslint 'ts/**/*.ts'"
