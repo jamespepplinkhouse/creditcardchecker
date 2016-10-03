@@ -3,14 +3,10 @@
 This program validates and identifies credit card numbers by consuming an input file which has one credit card number per line. It writes the results into an output file with one credit card per line. This program is optimised for parsing large files as quickly as possible (it will use all CPU cores at 100%). Try this for a quick way to build and test the program:
 ```
 npm install typescript -g
-npm install typings -g
 npm install
 npm start
 ```
-*Note:* I am using Node 6.2 at the time of writing
-
-To try a larger input data set (3,310,000 cards) there is a file at: ./data/input_credit_cards_large.txt
-
+*Note:* I am using Node 6.5 at the time of writing
 
 *Performance Features:*
 - Streams the input file so that it can process very large files
@@ -40,4 +36,4 @@ sys     0m1.081s
 
 ## Multi-Node Architecture
 
-In order to utilise all CPU cores I have used [node-worker-pool](https://www.npmjs.com/package/node-worker-pool) which works by starting workers (child Node.js processes) and sending messages to them via stdout (on Linux my understanding is that this is basically a unix socket). This allows for the CPU bound work to be spread over all CPU cores. On every chunk of the input file stream I send the chunk to the worker pool. There are 837 chunks in the large data set.
+In order to utilise all CPU cores I have used [node-worker-pool](https://www.npmjs.com/package/node-worker-pool) which works by starting workers (child Node.js processes) and sending messages to them via stdout. This allows for the CPU bound work to be spread over all CPU cores. On every chunk of the input file stream I send the chunk to the worker pool. There are 837 chunks in the large data set.

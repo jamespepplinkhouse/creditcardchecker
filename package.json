@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production node js/app.js",
+    "start": "NODE_ENV=production node js/app.js data/input_credit_cards_large.txt data/output_credit_cards.txt",
     "debug": "DEBUG=*.ts node js/app.js",
     "compile": "npm run lint && rimraf js/* && tsc --sourcemap -p ts/",
     "lint": "tslint 'ts/**/*.ts'"
