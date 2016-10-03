@@ -12,7 +12,9 @@ import * as R from 'ramda'
 
 export function validateCards(cards: string[]): string[] {
   return R.map((x) => {
-    return `${determineCardType(x)}: ${x} (${luhn(x) ? 'valid' : 'invalid'})`
+    let cardType = determineCardType(x)
+    let validity = luhn(x) ? 'valid' : 'invalid'
+    return cardType + ': ' + x + ' (' + validity + ')'
   }, cards)
 }
 
