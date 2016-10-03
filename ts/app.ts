@@ -1,3 +1,4 @@
+console.time('program')
 const fs = require('fs')
 const os = require('os')
 import * as _ from 'lodash'
@@ -10,18 +11,18 @@ inputStream.setEncoding('utf8')
 const outputStream = fs.createWriteStream('data/output_credit_cards.txt')
 
 const numberOfWorkers = os.cpus().length
+console.log(`numberOfWorkers: ${numberOfWorkers}`)
 const workerPool = new WorkerPool(
   numberOfWorkers,
   process.execPath, // path to the node binary
   [ './js/lib/worker.js' ], // arguments array
-  {
-    initData: {someUsefulConstant: 42} // initData is sent exactly once to each worker on startup
-  }
+  { initData: {} } // initData is sent exactly once to each worker on startup
 )
 
 let chunkCount = 0
 let chunksProcessing = 0
 
+console.time('inputStream')
 inputStream.on('data', async (chunk: string) => {
   chunkCount++
   chunksProcessing++
@@ -35,11 +36,14 @@ inputStream.on('data', async (chunk: string) => {
   if (chunksProcessing === 0) {
     // The last chunk has been processed - exit
     outputStream.end()
+    console.time('workerPoolDestroy')
     await workerPool.destroy()
-    console.log('All worker processes have now been killed')
+    console.timeEnd('workerPoolDestroy')
+    console.timeEnd('program')
   }
 })
 
 inputStream.on('end', () => {
-  console.log(`Finished processing input stream with ${chunkCount} chunks`)
+  console.timeEnd('inputStream')
+  console.log(`chunkCount: ${chunkCount}`)
 })
