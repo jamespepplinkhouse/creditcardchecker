@@ -27,7 +27,7 @@ inputStream.on('data', async (chunk: string) => {
   chunkCount++
   chunksProcessing++
 
-  let cards: string[] = R.filter((x) => x !== '',  R.split('\n', chunk))
+  let cards: string[] = R.filter((x) => x !== '', R.split('\n', chunk))
   let message: Message = { data: cards }
   let reply: Message = await workerPool.sendMessage(message)
 
