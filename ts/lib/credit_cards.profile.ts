@@ -203,6 +203,6 @@ const cards = ['4111111111111111',
 
 console.time('harness')
 for (let i = 0; i < 10000; i++) {
-  const results = creditCards.validateCards(cards)
+  creditCards.validateCards(cards)
 }
 console.timeEnd('harness')

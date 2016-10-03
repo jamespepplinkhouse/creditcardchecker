@@ -11,11 +11,13 @@ import * as R from 'ramda'
 //    Unknown: 9111111111111111 (invalid)
 
 export function validateCards(cards: string[]): string[] {
-  return R.map((x) => {
-    let cardType = determineCardType(x)
-    let validity = luhn(x) ? 'valid' : 'invalid'
-    return cardType + ': ' + x + ' (' + validity + ')'
-  }, cards)
+  return R.map(validateCard, cards)
+}
+
+function validateCard(x) {
+  let cardType = determineCardType(x)
+  let validity = luhn(x) ? 'valid' : 'invalid'
+  return cardType + ': ' + x + ' (' + validity + ')'
 }
 
 function luhn(card) {
