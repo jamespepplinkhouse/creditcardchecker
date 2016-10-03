@@ -1,5 +1,3 @@
-/// <reference path="../typings/index.d.ts"/>
-
 const fs = require('fs')
 const os = require('os')
 import * as _ from 'lodash'
