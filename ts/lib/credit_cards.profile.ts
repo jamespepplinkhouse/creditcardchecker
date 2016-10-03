@@ -202,5 +202,7 @@ const cards = ['4111111111111111',
 '378282246310005']
 
 console.time('harness')
-const results = creditCards.validateCards(cards)
+for (let i = 0; i < 10000; i++) {
+  const results = creditCards.validateCards(cards)
+}
 console.timeEnd('harness')
