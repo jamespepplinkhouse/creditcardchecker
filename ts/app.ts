@@ -3,8 +3,6 @@
 
 console.time('program')
 const fs = require('fs')
-const os = require('os')
-import * as R from 'ramda'
 const workerFarm = require('worker-farm')
 const workers = workerFarm(require.resolve('./lib/worker'))
 const log = console.log
