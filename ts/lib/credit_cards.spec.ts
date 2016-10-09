@@ -39,4 +39,19 @@ describe('credit_cards', function() {
 
     expect(validateCards(cards)).to.eql(cardDescriptions)
   })
+
+  it('VISA', function() {
+    const cards = [
+      '4111111111111111',
+      '4111111111111',
+      '4012888888881881'
+    ]
+
+    const cardDescriptions = [
+     'VISA: 4111111111111111 (valid)',
+     'VISA: 4111111111111 (invalid)',
+     'VISA: 4012888888881881 (valid)'
+    ]
+    expect(validateCards(cards)).to.eql(cardDescriptions)
+  })
 })
