@@ -14,8 +14,8 @@
   "author": "James Pepplinkhouse",
   "license": "MIT",
   "dependencies": {
-    "node-worker-pool": "3.0.2",
-    "ramda": "^0.22.1"
+    "ramda": "^0.22.1",
+    "worker-farm": "^1.3.1"
   },
   "devDependencies": {
     "@types/node": "6.0.41",
