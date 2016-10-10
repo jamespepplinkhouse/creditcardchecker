@@ -2,6 +2,7 @@
 /// <reference path="../node_modules/@types/node/index.d.ts"/>
 
 console.time('program')
+
 const fs = require('fs')
 const workerFarm = require('worker-farm')
 const workers = workerFarm(require.resolve('./lib/worker'))

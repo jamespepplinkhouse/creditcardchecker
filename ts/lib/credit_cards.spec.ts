@@ -6,15 +6,25 @@ import { validateCards } from './credit_cards'
 
 describe('credit_cards', function() {
   it('AMEX', function() {
-    const cards = [ '378282246310005' ]
-    const cardDescriptions = [ 'AMEX: 378282246310005 (invalid)' ]
+    const cards = [
+      '378282246310005'
+    ]
+
+    const cardDescriptions = [
+      'AMEX: 378282246310005 (invalid)'
+    ]
 
     expect(validateCards(cards)).to.eql(cardDescriptions)
   })
 
   it('Discover', function() {
-    const cards = [ '6011111111111117' ]
-    const cardDescriptions = [ 'Discover: 6011111111111117 (valid)' ]
+    const cards = [
+      '6011111111111117'
+    ]
+
+    const cardDescriptions = [
+      'Discover: 6011111111111117 (valid)'
+    ]
 
     expect(validateCards(cards)).to.eql(cardDescriptions)
   })
@@ -34,8 +44,13 @@ describe('credit_cards', function() {
   })
 
   it('Unknown', function() {
-    const cards = [ '9111111111111111' ]
-    const cardDescriptions = [ 'Unknown: 9111111111111111 (invalid)' ]
+    const cards = [
+      '9111111111111111'
+    ]
+
+    const cardDescriptions = [
+      'Unknown: 9111111111111111 (invalid)'
+    ]
 
     expect(validateCards(cards)).to.eql(cardDescriptions)
   })
@@ -52,6 +67,7 @@ describe('credit_cards', function() {
      'VISA: 4111111111111 (invalid)',
      'VISA: 4012888888881881 (valid)'
     ]
+
     expect(validateCards(cards)).to.eql(cardDescriptions)
   })
 })
