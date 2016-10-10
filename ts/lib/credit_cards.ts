@@ -5,7 +5,7 @@ const isDiscover = (card: string) => card.length === 16 && card.startsWith('6011
 const isMasterCard = (card: string) => card.length === 16 && (card.startsWith('51') || card.startsWith('55'))
 const isVisa = (card: string) => (card.length === 13 || card.length === 16) && card.startsWith('4')
 
-var determineCardType = cond([
+const determineCardType = cond([
   [isVisa, always('VISA')],
   [isMasterCard, always('MasterCard')],
   [isDiscover, always('Discover')],
