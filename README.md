@@ -8,6 +8,7 @@ npm start
 ```
 *Note:* I am using Node 6.5 at the time of writing
 
+
 *Performance Features:*
 - Streams the input file so that it can process very large files
 - Input stream allows the program to start processing and writing the output file before the input file is fully loaded
