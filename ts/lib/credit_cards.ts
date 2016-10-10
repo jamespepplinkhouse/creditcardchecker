@@ -1,16 +1,16 @@
-import * as R from 'ramda'
+import { always, cond, map, T } from 'ramda'
 
 const isAmex = (card: string) => card.length === 15 && (card.startsWith('34') || card.startsWith('37'))
 const isDiscover = (card: string) => card.length === 16 && card.startsWith('6011')
 const isMasterCard = (card: string) => card.length === 16 && (card.startsWith('51') || card.startsWith('55'))
 const isVisa = (card: string) => (card.length === 13 || card.length === 16) && card.startsWith('4')
 
-var determineCardType = R.cond([
-  [isVisa, R.always('VISA')],
-  [isMasterCard, R.always('MasterCard')],
-  [isDiscover, R.always('Discover')],
-  [isAmex, R.always('AMEX')],
-  [R.T, R.always('Unknown')]
+var determineCardType = cond([
+  [isVisa, always('VISA')],
+  [isMasterCard, always('MasterCard')],
+  [isDiscover, always('Discover')],
+  [isAmex, always('AMEX')],
+  [T, always('Unknown')]
 ])
 
 function luhn(card) {
@@ -35,5 +35,5 @@ function validateCard(x) {
 }
 
 export function validateCards(cards: string[]): string[] {
-  return R.map(validateCard, cards)
+  return map(validateCard, cards)
 }
