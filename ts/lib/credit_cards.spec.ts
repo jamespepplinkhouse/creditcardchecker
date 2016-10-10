@@ -11,7 +11,7 @@ describe('credit_cards', function() {
     ]
 
     const cardDescriptions = [
-      'AMEX: 378282246310005 (invalid)'
+      'AMEX: 378282246310005 (valid)'
     ]
 
     expect(validateCards(cards)).to.eql(cardDescriptions)
