@@ -22,10 +22,10 @@ const luhn = function(card) {
   return !(d % 10)
 }
 
-function validateCard(x) {
-  let cardType = determineCardType(x)
-  let validity = luhn(x) ? 'valid' : 'invalid'
-  return cardType + ': ' + x + ' (' + validity + ')'
+function validateCard(card) {
+  let cardType = determineCardType(card)
+  let validity = cardType !== 'Unknown' && luhn(card) ? 'valid' : 'invalid'
+  return cardType + ': ' + card + ' (' + validity + ')'
 }
 
 export function validateCards(cards: string[]): string[] {
