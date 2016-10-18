@@ -4,34 +4,26 @@
 console.time('program')
 
 const fs = require('fs')
-const workerFarm = require('worker-farm')
-const workers = workerFarm(require.resolve('./lib/worker'))
 const log = console.log
 const time = console.time
 const timeEnd = console.timeEnd
+
+import { split } from 'ramda'
+import { validateCards } from './lib/credit_cards'
 
 const inputStream = fs.createReadStream(process.argv[2], { encoding: 'utf8' })
 const outputStream = fs.createWriteStream(process.argv[3])
 
 let chunkCount = 0
-let chunksProcessing = 0
+const newLine = '\n'
 
 time('inputStream')
-inputStream.on('data', async (chunk: string) => {
+inputStream.on('data', (chunk: string) => {
   chunkCount++
-  chunksProcessing++
 
-  workers(chunk, function (err, response) {
-    outputStream.write(response)
-    chunksProcessing--
-
-    if (chunksProcessing === 0) {
-      // The last chunk has been processed - exit
-      outputStream.end()
-      workerFarm.end(workers)
-      timeEnd('program')
-    }
-  })
+  let cards = validateCards(split(newLine, chunk.trim()))
+  let processedCards = cards.join(newLine)
+  outputStream.write(processedCards)
 })
 
 inputStream.on('end', () => {

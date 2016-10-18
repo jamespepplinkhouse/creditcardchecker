@@ -5,6 +5,8 @@ const isDiscover = (card: string) => card.length === 16 && card.startsWith('6011
 const isMasterCard = (card: string) => card.length === 16 && (card.startsWith('51') || card.startsWith('55'))
 const isVisa = (card: string) => (card.length === 13 || card.length === 16) && card.startsWith('4')
 
+let cache = {}
+
 const determineCardType = cond([
   [isVisa, always('VISA')],
   [isMasterCard, always('MasterCard')],
@@ -22,10 +24,17 @@ const luhn = function(card) {
   return !(d % 10)
 }
 
-function validateCard(card) {
+function validateCard(card: string) {
+  if (cache[card]) {
+    return cache[card]
+  }
+
   let cardType = determineCardType(card)
   let validity = cardType !== 'Unknown' && luhn(card) ? 'valid' : 'invalid'
-  return cardType + ': ' + card + ' (' + validity + ')'
+
+  let result = cardType + ': ' + card + ' (' + validity + ')'
+  cache[card] = result
+  return result
 }
 
 export function validateCards(cards: string[]): string[] {
