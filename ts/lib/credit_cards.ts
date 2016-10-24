@@ -1,9 +1,9 @@
 import { always, cond, map, T } from 'ramda'
 
-const isAmex = (card: string) => card.length === 15 && (card.startsWith('34') || card.startsWith('37'))
-const isDiscover = (card: string) => card.length === 16 && card.startsWith('6011')
-const isMasterCard = (card: string) => card.length === 16 && (card.startsWith('51') || card.startsWith('55'))
-const isVisa = (card: string) => (card.length === 13 || card.length === 16) && card.startsWith('4')
+const isAmex = (card: string) => card.length === 15 && (card.substr(0, 2) === ('34') || card.substr(0, 2) === ('37'))
+const isDiscover = (card: string) => card.length === 16 && card.substr(0, 4) === ('6011')
+const isMasterCard = (card: string) => card.length === 16 && (card.substr(0, 2) === ('51') || card.substr(0, 2) === ('55'))
+const isVisa = (card: string) => (card.length === 13 || card.length === 16) && card.substr(0, 1) === ('4')
 
 const determineCardType = cond([
   [isVisa, always('VISA')],

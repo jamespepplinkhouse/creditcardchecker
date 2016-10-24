@@ -17,7 +17,7 @@ let chunkCount = 0
 let chunksProcessing = 0
 
 time('inputStream')
-inputStream.on('data', async (chunk: string) => {
+inputStream.on('data', (chunk: string) => {
   chunkCount++
   chunksProcessing++
 
