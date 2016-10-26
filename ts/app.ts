@@ -5,7 +5,7 @@ console.time('program')
 
 const fs = require('fs')
 const workerFarm = require('worker-farm')
-const workers = workerFarm(require.resolve('./lib/worker'))
+const workers = workerFarm({ maxConcurrentCallsPerWorker: Infinity }, require.resolve('./lib/worker'))
 const log = console.log
 const time = console.time
 const timeEnd = console.timeEnd
