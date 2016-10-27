@@ -1,8 +1,8 @@
-import { split } from 'ramda'
-import { validateCards } from './credit_cards'
+// import { split } from 'ramda'
+import { validateCard } from './credit_cards'
 
-module.exports = function (message, callback) {
+module.exports = function (line: string, callback) {
   const newLine = '\n'
-  let cards = validateCards(split(newLine, message.trim()))
-  callback(null, cards.join(newLine))
+  let card = validateCard(line.trim())
+  callback(null, card + newLine)
 }

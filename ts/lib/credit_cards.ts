@@ -22,7 +22,7 @@ const luhn = function(card) {
   return !(d % 10)
 }
 
-function validateCard(card) {
+export function validateCard(card) {
   let cardType = determineCardType(card)
   let validity = cardType !== 'Unknown' && luhn(card) ? 'valid' : 'invalid'
   return cardType + ': ' + card + ' (' + validity + ')'

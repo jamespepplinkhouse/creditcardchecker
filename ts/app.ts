@@ -4,24 +4,27 @@
 console.time('program')
 
 const fs = require('fs')
+const readline = require('readline')
 const workerFarm = require('worker-farm')
-const workers = workerFarm({ maxConcurrentCallsPerWorker: Infinity }, require.resolve('./lib/worker'))
+const workers = workerFarm(require.resolve('./lib/worker'))
 const log = console.log
 const time = console.time
 const timeEnd = console.timeEnd
 
-const inputStream = fs.createReadStream(process.argv[2], { encoding: 'utf8' })
+const rl = readline.createInterface({
+  input: fs.createReadStream(process.argv[2], { encoding: 'utf8' })
+})
 const outputStream = fs.createWriteStream(process.argv[3])
 
 let chunkCount = 0
 let chunksProcessing = 0
 
 time('inputStream')
-inputStream.on('data', (chunk: string) => {
+rl.on('line', (line: string) => {
   chunkCount++
   chunksProcessing++
 
-  workers(chunk, function (err, response) {
+  workers(line, function (err, response) {
     outputStream.write(response)
     chunksProcessing--
 
@@ -34,7 +37,7 @@ inputStream.on('data', (chunk: string) => {
   })
 })
 
-inputStream.on('end', () => {
+rl.on('close', () => {
   timeEnd('inputStream')
   log(`chunkCount: ${chunkCount}`)
 })
