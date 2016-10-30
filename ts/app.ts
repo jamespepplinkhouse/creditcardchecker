@@ -5,23 +5,31 @@ console.time('program')
 
 const fs = require('fs')
 const workerFarm = require('worker-farm')
+import { sliceChunk } from './lib/utils'
+
 const workers = workerFarm({ maxConcurrentCallsPerWorker: Infinity }, require.resolve('./lib/worker'))
 const log = console.log
 const time = console.time
 const timeEnd = console.timeEnd
 
-const inputStream = fs.createReadStream(process.argv[2], { encoding: 'utf8' })
-const outputStream = fs.createWriteStream(process.argv[3])
+const inputFile = process.argv[2]
+const outputFile = process.argv[3]
+const inputStream = fs.createReadStream(inputFile, { encoding: 'utf8' })
+const outputStream = fs.createWriteStream(outputFile)
 
 let chunkCount = 0
 let chunksProcessing = 0
+let lastTail = ''
 
 time('inputStream')
 inputStream.on('data', (chunk: string) => {
   chunkCount++
   chunksProcessing++
 
-  workers(chunk, function (err, response) {
+  const slices = sliceChunk(chunk, lastTail)
+  lastTail = slices.tail
+
+  workers(slices.head, function (err, response) {
     outputStream.write(response)
     chunksProcessing--
 
