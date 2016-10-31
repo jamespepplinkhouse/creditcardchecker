@@ -19,6 +19,7 @@ const outputStream = fs.createWriteStream(outputFile)
 
 let chunkCount = 0
 let chunksProcessing = 0
+let inputStreamFinished = false
 let lastTail = ''
 
 time('inputStream')
@@ -33,8 +34,7 @@ inputStream.on('data', (chunk: string) => {
     outputStream.write(response)
     chunksProcessing--
 
-    if (chunksProcessing === 0) {
-      // The last chunk has been processed - exit
+    if (inputStreamFinished && chunksProcessing === 0) {
       outputStream.end()
       workerFarm.end(workers)
       timeEnd('program')
@@ -43,6 +43,7 @@ inputStream.on('data', (chunk: string) => {
 })
 
 inputStream.on('end', () => {
+  inputStreamFinished = true
   timeEnd('inputStream')
   log(`chunkCount: ${chunkCount}`)
 })
