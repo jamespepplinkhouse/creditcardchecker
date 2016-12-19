@@ -6,7 +6,7 @@ npm install typescript -g
 npm install
 npm start
 ```
-*Note:* I am using Node 6.5 at the time of writing
+*Note:* I am using Node v7.2.0 at the time of writing
 
 
 *Performance Features:*
@@ -15,7 +15,7 @@ npm start
 - Processes cards in chunks in multiple Node.js processes to use all CPU cores
 
 *My observations with the large data set:*
-- Much faster than the [Elixir solution](https://github.com/jamespepplinkhouse/creditcardchecker-elixir) (~15 seconds for Node.js vs ~46 seconds for Elixir) although both can be optimised further
+- Much faster than the [Elixir solution](https://github.com/jamespepplinkhouse/creditcardchecker-elixir) (~5 seconds for Node.js vs ~46 seconds for Elixir) although both can be optimised further
 - Consistent memory usage (~100-150MB on my machine)
 - Node.js reaches 100% CPU very quickly, I think due to streaming the file very quickly
 - To solve this CPU bound problem with Node.js I used [worker-farm](https://www.npmjs.com/package/worker-farm) which I can recommend for it's minimum boiler plate and good feature set
@@ -23,31 +23,32 @@ npm start
 - Results from three runs:
 
 ```
-inputStream: 526.443ms
-chunkCount: 837
-program: 14836.772ms
+inputStream: 3493.491ms
+chunkCount: 827
+program: 3534.477ms
 
-real    0m15.648s
-user    0m57.972s
-sys     0m1.088s
+real	0m4.312s
+user	0m11.436s
+sys	0m0.728s
 ```
 ```
-inputStream: 594.973ms
-chunkCount: 837
-program: 15064.395ms
+inputStream: 3689.429ms
+chunkCount: 827
+program: 3718.352ms
 
-real    0m15.865s
-user    0m58.772s
-sys     0m1.040s
-```
-```
-inputStream: 576.852ms
-chunkCount: 837
-program: 14898.166ms
+real	0m4.498s
+user	0m11.548s
+sys	0m0.864s
 
-real    0m15.734s
-user    0m58.264s
-sys     0m1.072s
+```
+```
+inputStream: 3497.040ms
+chunkCount: 827
+program: 3532.661ms
+
+real	0m4.424s
+user	0m11.408s
+sys	0m0.760s
 ```
 
 ## Multi-Node Architecture
