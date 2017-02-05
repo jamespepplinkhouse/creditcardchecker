@@ -15,7 +15,7 @@ npm start
 - Processes cards in chunks in multiple Node.js processes to use all CPU cores
 
 *My observations with the large data set:*
-- Much faster than the [Elixir solution](https://github.com/jamespepplinkhouse/creditcardchecker-elixir) (~5 seconds for Node.js vs ~46 seconds for Elixir) although both can be optimised further
+- Much faster than the [Elixir solution](https://github.com/jamespepplinkhouse/creditcardchecker-elixir) although the Elixir version can be optimised further
 - Consistent memory usage (~100-150MB on my machine)
 - Node.js reaches 100% CPU very quickly, I think due to streaming the file very quickly
 - To solve this CPU bound problem with Node.js I used [worker-farm](https://www.npmjs.com/package/worker-farm) which I can recommend for it's minimum boiler plate and good feature set
@@ -23,32 +23,35 @@ npm start
 - Results from three runs:
 
 ```
-inputStream: 3493.491ms
+inputStream: 1052.884ms
 chunkCount: 827
-program: 3534.477ms
+program: 1075.044ms
+Done in 1.31s.
 
-real	0m4.312s
-user	0m11.436s
-sys	0m0.728s
+real    0m1.436s
+user    0m3.452s
+sys     0m0.256s
 ```
 ```
-inputStream: 3689.429ms
+inputStream: 1039.218ms
 chunkCount: 827
-program: 3718.352ms
+program: 1052.653ms
+Done in 1.29s.
 
-real	0m4.498s
-user	0m11.548s
-sys	0m0.864s
+real    0m1.419s
+user    0m3.360s
+sys     0m0.304s
 
 ```
 ```
-inputStream: 3497.040ms
+inputStream: 434.628ms
 chunkCount: 827
-program: 3532.661ms
+program: 1152.401ms
+Done in 1.40s.
 
-real	0m4.424s
-user	0m11.408s
-sys	0m0.760s
+real    0m1.511s
+user    0m3.320s
+sys     0m0.308s
 ```
 
 ## Multi-Node Architecture
