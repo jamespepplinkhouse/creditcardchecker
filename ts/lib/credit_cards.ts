@@ -14,14 +14,14 @@ const determineCardType = cond([
 ])
 
 export const luhn = (card: string): boolean => {
-  let b, c, d, e
+  let b = 0, c = 0, total = 0, e = 0
 
-  for (d = +card[b = card.length - 1], e = 0; b--; ) {
+  for (total = +card[b = card.length - 1], e = 0; b--; ) {
     c = +card[b]
-    d += ++e % 2 ? 2 * c % 10 + (c > 4 ? 1 : 0) : c
+    total += ++e % 2 ? 2 * c % 10 + (c > 4 ? 1 : 0) : c
   }
 
-  return !(d % 10)
+  return !(total % 10)
 }
 
 export const validateCard = (card: string): string => {
