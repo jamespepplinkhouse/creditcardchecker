@@ -13,7 +13,7 @@ const determineCardType = cond([
   [T, always('Unknown')]
 ])
 
-const luhn = function(card) {
+export const luhn = function (card: string) {
   let b, c, d, e
   for (d = +card[b = card.length - 1], e = 0; b--; ) {
     c = +card[b]
@@ -22,7 +22,7 @@ const luhn = function(card) {
   return !(d % 10)
 }
 
-function validateCard(card) {
+export function validateCard(card: string) {
   let cardType = determineCardType(card)
   let validity = cardType !== 'Unknown' && luhn(card) ? 'valid' : 'invalid'
   return cardType + ': ' + card + ' (' + validity + ')'
