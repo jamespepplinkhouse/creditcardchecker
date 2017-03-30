@@ -8,10 +8,10 @@ const workerFarm = require('worker-farm')
 
 const workers = workerFarm({ maxConcurrentCallsPerWorker: Infinity }, require.resolve('./lib/worker'))
 
-const inputFile = process.argv[2]
-const outputFile = process.argv[3]
-const inputStream = fs.createReadStream(inputFile, { encoding: 'utf8' })
-const outputStream = fs.createWriteStream(outputFile)
+const inputFilePath = process.argv[2]
+const outputFilePath = process.argv[3]
+const inputStream = fs.createReadStream(inputFilePath, { encoding: 'utf8' })
+const outputStream = fs.createWriteStream(outputFilePath)
 
 let chunkCount = 0
 let chunksProcessing = 0

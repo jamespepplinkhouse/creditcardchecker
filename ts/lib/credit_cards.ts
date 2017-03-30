@@ -13,21 +13,21 @@ const determineCardType = cond([
   [T, always('Unknown')]
 ])
 
-export const luhn = function (card: string) {
+export const luhn = (card: string): boolean => {
   let b, c, d, e
+
   for (d = +card[b = card.length - 1], e = 0; b--; ) {
     c = +card[b]
     d += ++e % 2 ? 2 * c % 10 + (c > 4 ? 1 : 0) : c
   }
+
   return !(d % 10)
 }
 
-export function validateCard(card: string) {
-  let cardType = determineCardType(card)
-  let validity = cardType !== 'Unknown' && luhn(card) ? 'valid' : 'invalid'
-  return cardType + ': ' + card + ' (' + validity + ')'
+export const validateCard = (card: string): string => {
+  const cardType = determineCardType(card)
+  const validity = cardType !== 'Unknown' && luhn(card) ? 'valid' : 'invalid'
+  return `${cardType}: ${card} (${validity})`
 }
 
-export function validateCards(cards: string[]): string[] {
-  return map(validateCard, cards)
-}
+export const validateCards = (cards: string[]): string[] => map(validateCard, cards)

@@ -3,7 +3,9 @@ import { validateCards } from './credit_cards'
 
 const newLine = '\n'
 
-module.exports = function (message, callback) {
-  let cards = validateCards(split(newLine, message))
+export type HandleMessageCallback = (error: Error, result: String) => void
+
+module.exports = (message: string, callback: HandleMessageCallback) => {
+  const cards = validateCards(split(newLine, message))
   callback(null, cards.join(newLine) + newLine)
 }
