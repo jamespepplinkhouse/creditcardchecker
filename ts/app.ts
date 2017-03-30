@@ -1,15 +1,10 @@
-/// <reference path="../node_modules/@types/ramda/ramda.d.ts"/>
-/// <reference path="../node_modules/@types/node/index.d.ts"/>
-
-const log = console.log
-const time = console.time
-const timeEnd = console.timeEnd
+const { log, time, timeEnd } = console
 
 time('program')
 
-const fs = require('fs')
-const workerFarm = require('worker-farm')
+import * as fs from 'fs'
 import { sliceChunk } from './lib/utils'
+const workerFarm = require('worker-farm')
 
 const workers = workerFarm({ maxConcurrentCallsPerWorker: Infinity }, require.resolve('./lib/worker'))
 

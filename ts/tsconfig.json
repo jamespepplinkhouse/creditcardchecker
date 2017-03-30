@@ -17,8 +17,5 @@
     "!./**/*.d.ts",
     "!./node_modules/**/*.ts",
     "../typings/main.d.ts"
-  ],
-  "atom": {
-    "rewriteTsconfig": false
-  }
+  ]
 }
