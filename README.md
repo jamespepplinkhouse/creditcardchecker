@@ -68,7 +68,7 @@ Statistical profiling result from isolate-0x27906f0-v8.log, (820 ticks, 22 unacc
       2    0.2%    0.3%  LazyCompile: *isAmex /srv/git/creditcardchecker-node/js/lib/credit_cards.js:3:23
 ```
 
-*Note:* I am using Node v7.8.0 at the time of writing
+*Note:* I am using Node v8.1.0 at the time of writing
 
 
 ## Performance Features
@@ -90,17 +90,17 @@ To give you an idea, my first implementation took a couple of minutes (on older 
 Here are results from three runs on my desktop - *Intel(R) Core(TM) i5-7600 CPU @ 3.50GHz with SSD*:
 
 ```
-inputStream: 509.952ms
-program: 974.298ms
-Done in 1.22s.
+inputStream: 471.286ms
+chunkCount: 827
+program: 939.097ms
 
-inputStream: 462.428ms
-program: 944.474ms
-Done in 1.19s.
+inputStream: 453.565ms
+chunkCount: 827
+program: 973.674ms
 
-inputStream: 707.777ms
-program: 935.820ms
-Done in 1.19s.
+inputStream: 574.500ms
+chunkCount: 827
+program: 931.763ms
 ```
 
 ## Multi-Node Architecture
