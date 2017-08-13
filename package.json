@@ -9,7 +9,7 @@
     "debug": "DEBUG=*.ts node js/app.js",
     "build": "npm run lint && rimraf js/* && tsc --sourcemap -p ts/",
     "lint": "tslint 'ts/**/*.ts'",
-    "test": "npm run compile && mocha --require mocha-global.js $(find js/ -name *.spec.js)"
+    "test": "npm run build && mocha --require mocha-global.js $(find js/ -name *.spec.js)"
   },
   "author": "James Pepplinkhouse",
   "license": "MIT",
