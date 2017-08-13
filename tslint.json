@@ -1,4 +1,6 @@
+
 {
+  "extends": ["tslint:latest"],
   "rules": {
     "align": [
       true,
@@ -6,6 +8,7 @@
       "statements"
     ],
     "ban": false,
+    "arrow-parens": false,
     "class-name": true,
     "comment-format": [
       true,
@@ -21,10 +24,9 @@
     "interface-name": false,
     "jsdoc-format": true,
     "label-position": true,
-    "label-undefined": true,
     "max-line-length": [
-      true,
-      160
+      false,
+      200
     ],
     "member-access": true,
     "member-ordering": [
@@ -47,24 +49,22 @@
       "trace"
     ],
     "no-construct": false,
-    "no-constructor-vars": false,
+    "no-parameter-properties": false,
     "no-debugger": false,
-    "no-duplicate-key": true,
     "no-duplicate-variable": true,
     "no-empty": true,
     "no-eval": false,
     "no-inferrable-types": false,
     "no-internal-module": false,
     "no-null-keyword": false,
+    "prefer-object-spread": false,
     "no-require-imports": false,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
-    "no-unreachable": true,
     "no-unused-expression": true,
-    "no-unused-variable": true,
-    "no-use-before-declare": true,
+    "no-use-before-declare": false,
     "no-var-keyword": false,
     "no-var-requires": false,
     "object-literal-sort-keys": false,
@@ -79,10 +79,14 @@
     "quotemark": [
       true,
       "single",
-      "avoid-escape"
+      "avoid-escape",
+      "jsx-single"
     ],
     "radix": false,
-    "semicolon": [true, "never"],
+    "semicolon": [
+      true,
+      "never"
+    ],
     "switch-default": true,
     "trailing-comma": [
       true,
@@ -96,13 +100,8 @@
       "allow-null-check"
     ],
     "typedef": [
-      false,
-      "call-signature",
-      "parameter",
-      "arrow-parameter",
-      "property-declaration",
-      "variable-declaration",
-      "member-variable-declaration"
+      true,
+      "call-signature"
     ],
     "typedef-whitespace": [
       true,
@@ -120,11 +119,6 @@
         "property-declaration": "space",
         "variable-declaration": "space"
       }
-    ],
-    "use-strict": [
-      false,
-      "check-module",
-      "check-function"
     ],
     "variable-name": [
       true,
