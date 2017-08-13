@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node js/app.js data/input_credit_cards_large.txt data/output_credit_cards.txt",
-    "profile": "node --prof js/app.js data/input_credit_cards_large.txt data/output_credit_cards.txt",
+    "profile": "rm isolate*.log profiles.log && node --prof js/app.js data/input_credit_cards_large.txt data/output_credit_cards.txt && ls isolate-0x*.log | xargs -L1 node --prof-process > profiles.log",
     "build": "npm run lint && rimraf js/* && tsc --sourcemap -p ts/",
     "lint": "tslint 'ts/**/*.ts'",
     "test": "npm run build && mocha --require mocha-global.js $(find js/ -name *.spec.js)"
