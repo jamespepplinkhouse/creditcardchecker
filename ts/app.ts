@@ -26,7 +26,7 @@ inputStream.on('data', (chunk: string) => {
   const slices = sliceChunk(chunk, lastTail)
   lastTail = slices.tail
 
-  workers(slices.head, function (error: Error, response: string) {
+  workers(slices.head, (error: Error, response: string) => {
     outputStream.write(response)
     chunksProcessing--
 

@@ -14,9 +14,13 @@ const determineCardType = cond([
 ])
 
 export const luhn = (card: string): boolean => {
-  let b = 0, c = 0, total = 0, e = 0
+  let b = 0
+  let c = 0
+  let total = 0
+  let e = 0
 
-  for (total = +card[b = card.length - 1], e = 0; b--; ) {
+  // tslint:disable-next-line:whitespace
+  for (total = +card[b = card.length - 1], e = 0; b--;) {
     c = +card[b]
     total += ++e % 2 ? 2 * c % 10 + (c > 4 ? 1 : 0) : c
   }

@@ -1,8 +1,8 @@
 import { expect } from 'chai'
 import { validateCards } from './credit_cards'
 
-describe('credit_cards', function() {
-  it('AMEX', function() {
+describe('credit_cards', () => {
+  it('AMEX', () => {
     const cards = [
       '378282246310005'
     ]
@@ -14,7 +14,7 @@ describe('credit_cards', function() {
     expect(validateCards(cards)).to.eql(cardDescriptions)
   })
 
-  it('Discover', function() {
+  it('Discover', () => {
     const cards = [
       '6011111111111117'
     ]
@@ -26,7 +26,7 @@ describe('credit_cards', function() {
     expect(validateCards(cards)).to.eql(cardDescriptions)
   })
 
-  it('MasterCard', function() {
+  it('MasterCard', () => {
     const cards = [
       '5105105105105100',
       '5105105105105106'
@@ -40,7 +40,7 @@ describe('credit_cards', function() {
     expect(validateCards(cards)).to.eql(cardDescriptions)
   })
 
-  it('Unknown', function() {
+  it('Unknown', () => {
     const cards = [
       '9111111111111111'
     ]
@@ -52,7 +52,7 @@ describe('credit_cards', function() {
     expect(validateCards(cards)).to.eql(cardDescriptions)
   })
 
-  it('VISA', function() {
+  it('VISA', () => {
     const cards = [
       '4111111111111111',
       '4111111111111',

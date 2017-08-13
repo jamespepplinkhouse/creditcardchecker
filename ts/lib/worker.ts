@@ -3,7 +3,7 @@ import { validateCards } from './credit_cards'
 
 const newLine = '\n'
 
-export type HandleMessageCallback = (error: Error, result: String) => void
+export type HandleMessageCallback = (error: Error, result: string) => void
 
 module.exports = (message: string, callback: HandleMessageCallback) => {
   const cards = validateCards(split(newLine, message))
