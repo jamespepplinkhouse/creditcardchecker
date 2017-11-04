@@ -6,10 +6,12 @@ import * as fs from 'fs'
 import { sliceChunk } from './lib/utils'
 const workerFarm = require('worker-farm')
 
-const workers = workerFarm({ maxConcurrentCallsPerWorker: Infinity }, require.resolve('./lib/worker'))
+const workers = workerFarm(
+  { maxConcurrentCallsPerWorker: Infinity },
+  require.resolve('./lib/worker')
+)
 
-const inputFilePath = process.argv[2]
-const outputFilePath = process.argv[3]
+const [, , inputFilePath, outputFilePath] = process.argv
 const inputStream = fs.createReadStream(inputFilePath, { encoding: 'utf8' })
 const outputStream = fs.createWriteStream(outputFilePath)
 

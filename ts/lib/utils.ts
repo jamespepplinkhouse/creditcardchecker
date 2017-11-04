@@ -1,7 +1,5 @@
-const newLine = '\n'
-
 export const sliceChunk = (chunk: string, lastTail: string) => {
-  const indexOfLastNewLine = chunk.lastIndexOf(newLine)
+  const indexOfLastNewLine = chunk.lastIndexOf('\n')
 
   return {
     head: lastTail + chunk.substr(0, indexOfLastNewLine),
