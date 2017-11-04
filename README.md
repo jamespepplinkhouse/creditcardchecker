@@ -68,7 +68,7 @@ Statistical profiling result from isolate-0x27906f0-v8.log, (820 ticks, 22 unacc
       2    0.2%    0.3%  LazyCompile: *isAmex /srv/git/creditcardchecker-node/js/lib/credit_cards.js:3:23
 ```
 
-*Note:* I am using Node v8.1.0 at the time of writing
+*Note:* I am using Node v9.0.0 at the time of writing
 
 
 ## Performance Features
@@ -82,7 +82,7 @@ Statistical profiling result from isolate-0x27906f0-v8.log, (820 ticks, 22 unacc
 - For me this has dispelled the myth that Node.js is not a good choice for CPU bound processing
 - Each new version of Node.js has made this program faster which is great to see!
 - Node.js has really fast file system IO thanks to C++ module goodness
-- TypeScript is great because I can target ES5 which is marginally faster than ES6 at the moment
+- TypeScript is great because I can target ES5 or ES6 easily, as of Node.js v9.0.0 performance is around the same
 
 ## Test Results
 To give you an idea, my first implementation took a couple of minutes (on older hardware, but still). It goes to show there is a lot of room for optimisation with Node.js if you need to squeeze out maxmimum performance!
@@ -90,19 +90,21 @@ To give you an idea, my first implementation took a couple of minutes (on older 
 Here are results from three runs on my desktop - *Intel(R) Core(TM) i5-7600 CPU @ 3.50GHz with SSD*:
 
 ```
-inputStream: 471.286ms
+inputStream: 570.475ms
 chunkCount: 827
-program: 939.097ms
+program: 1064.385ms
 
-inputStream: 453.565ms
+inputStream: 396.159ms
 chunkCount: 827
-program: 973.674ms
+program: 1088.752ms
 
-inputStream: 574.500ms
+inputStream: 469.506ms
 chunkCount: 827
-program: 931.763ms
+program: 1073.485ms
 ```
 
 ## Multi-Node Architecture
 
 In order to utilise all CPU cores I have used [worker-farm](https://www.npmjs.com/package/worker-farm) which works via [child_process.fork](https://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options). This allows for the CPU bound work to be spread over all CPU cores. On every chunk of the input file stream I send the chunk to the workers. There are 827 chunks in the large data set.
+
+I tried [Napa.js](https://github.com/Microsoft/napajs) [on another branch](https://github.com/jamespepplinkhouse/creditcardchecker-node/tree/feature/napajs). It's not as nice to work and meant I couldn't use NPM packages without serious performance penalties!
