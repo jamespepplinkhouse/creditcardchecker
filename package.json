@@ -11,7 +11,7 @@
     "debug": "DEBUG=*.ts node js/app.js",
     "build": "rimraf js/* && tsc --sourcemap -p ts/",
     "test":
-      "npm run compile && mocha --require mocha-global.js $(find js/ -name *.spec.js)"
+      "npm run build && mocha --require mocha-global.js $(find js/ -name *.spec.js)"
   },
   "author": "James Pepplinkhouse",
   "license": "MIT",
