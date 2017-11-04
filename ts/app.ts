@@ -9,65 +9,9 @@ time('program')
 const workers = require('os').cpus().length
 const zone = napa.zone.create('zone', { workers })
 
-function validateCards(cards: string) {
-  var determineCardType = function(card: string) {
-    if (
-      (card.length === 13 || card.length === 16) &&
-      card.substr(0, 1) === '4'
-    ) {
-      return 'VISA'
-    }
-
-    if (
-      card.length === 16 &&
-      (card.substr(0, 2) === '51' || card.substr(0, 2) === '55')
-    ) {
-      return 'MasterCard'
-    }
-
-    if (card.length === 16 && card.substr(0, 4) === '6011') {
-      return 'Discover'
-    }
-
-    if (
-      card.length === 15 &&
-      (card.substr(0, 2) === '34' || card.substr(0, 2) === '37')
-    ) {
-      return 'AMEX'
-    }
-
-    return 'Unknown'
-  }
-
-  var luhn = function(card: string) {
-    var b = 0
-    var c = 0
-    var total = 0
-    var e = 0
-    for (total = +card[(b = card.length - 1)], e = 0; b--; ) {
-      c = +card[b]
-      total += ++e % 2 ? (2 * c) % 10 + (c > 4 ? 1 : 0) : c
-    }
-    return !(total % 10)
-  }
-
-  var validateCard = function(card: string) {
-    var cardType = determineCardType(card)
-    var validity = cardType !== 'Unknown' && luhn(card) ? 'valid' : 'invalid'
-    return cardType + ': ' + card + ' (' + validity + ')'
-  }
-
-  return (
-    cards
-      .split('\n')
-      .map(validateCard)
-      .join('\n') + '\n'
-  )
-}
-
 time('workerBroadcast')
 zone
-  .broadcast(validateCards.toString())
+  .broadcast('console.log("Worker started!")')
   .then(() => {
     timeEnd('workerBroadcast')
 
@@ -89,7 +33,7 @@ zone
       lastTail = slices.tail
 
       zone
-        .execute('', 'validateCards', [slices.head])
+        .execute('./lib/credit_cards.js', 'validateCards', [slices.head])
         .then(result => {
           outputStream.write(
             result.payload

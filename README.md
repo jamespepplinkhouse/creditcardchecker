@@ -17,7 +17,6 @@ Notes:
 
 ### Setup
 ```
-$ npm install typescript --global
 $ npm install
 ```
 
@@ -74,35 +73,36 @@ Statistical profiling result from isolate-0x27906f0-v8.log, (820 ticks, 22 unacc
 ## Performance Features
 - Streams the input file so that it can process very large files
 - Input stream allows the program to start processing and writing the output file before the input file is fully loaded
-- Processes cards in chunks in multiple Node.js processes to use all CPU cores
-
-## Observations
-- I implemented this program in Elixir and while it was great fun it turned that Node.js was just as easy to implement for multi-core and a LOT faster at file streaming
-- There are 827 chunks in the input file which means 827 messages to worker processes
-- For me this has dispelled the myth that Node.js is not a good choice for CPU bound processing
-- Each new version of Node.js has made this program faster which is great to see!
-- Node.js has really fast file system IO thanks to C++ module goodness
-- TypeScript is great because I can target ES5 which is marginally faster than ES6 at the moment
+- Processes cards in all CPU cores using Napa.js
 
 ## Test Results
-To give you an idea, my first implementation took a couple of minutes (on older hardware, but still). It goes to show there is a lot of room for optimisation with Node.js if you need to squeeze out maxmimum performance!
 
 Here are results from three runs on my desktop - *Intel(R) Core(TM) i5-7600 CPU @ 3.50GHz with SSD*:
 
 ```
-inputStream: 471.286ms
+workerBroadcast: 0.518ms
+inputStream: 547.281ms
 chunkCount: 827
-program: 939.097ms
+program: 1298.217ms
 
-inputStream: 453.565ms
+workerBroadcast: 0.518ms
+inputStream: 516.010ms
 chunkCount: 827
-program: 973.674ms
+program: 1293.823ms
 
-inputStream: 574.500ms
+workerBroadcast: 0.502ms
+inputStream: 573.516ms
 chunkCount: 827
-program: 931.763ms
+program: 1299.787ms
 ```
 
-## Multi-Node Architecture
+## Observations on Napa.js
 
-In order to utilise all CPU cores I have used [worker-farm](https://www.npmjs.com/package/worker-farm) which works via [child_process.fork](https://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options). This allows for the CPU bound work to be spread over all CPU cores. On every chunk of the input file stream I send the chunk to the workers. There are 827 chunks in the large data set.
+In order to utilise all CPU cores I have used [Napa.js](https://github.com/Microsoft/napajs). This allows for the CPU bound work to be spread over all CPU cores. On every chunk of the input file stream I send the chunk to the workers. At the time of writing, Napa.js is still an early version (v0.1.5) and there are quite a few limitations compared to [worker-farm](https://www.npmjs.com/package/worker-farm).
+
+Specifically:
+- Napa.js doesn't support TypeScript natively yet but the source code is TS which is nice [Any plans for native TypeScript? ;)](https://github.com/Microsoft/napajs/issues/100)
+- Napa.js is limited to Node.js v8.4.0 or older for now (Node.js v9.0.0 just came out)
+- I had to remove dependencies like Ramda which added 13 seconds (!!!) to the normal execution time of 1.3 seconds; looks like requiring npm packages is a no-no with Napa.js for now
+- The payload string is returned with extra double quotes compare to what the worker returns so I had to strip them and then replace escaped new line chars :-(
+
