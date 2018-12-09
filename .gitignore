@@ -44,3 +44,6 @@ data/output_credit_cards.txt
 js/
 
 !mocha-global.js
+
+# Rust
+ccc-rust/target

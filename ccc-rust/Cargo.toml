@@ -1,5 +1,5 @@
 [package]
-name = "rust"
+name = "ccc-rust"
 version = "0.1.0"
 authors = ["James Pepplinkhouse <james.pepplinkhouse@gmail.com>"]
 edition = "2018"
