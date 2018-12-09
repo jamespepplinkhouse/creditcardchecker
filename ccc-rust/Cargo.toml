@@ -6,3 +6,4 @@ edition = "2018"
 
 [dependencies]
 luhn2 = "0.1"
+rayon = "1.0"

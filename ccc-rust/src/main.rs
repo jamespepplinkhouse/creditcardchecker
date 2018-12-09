@@ -1,4 +1,5 @@
 use luhn2::validate;
+use rayon::prelude::*;
 use std::env;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
@@ -11,9 +12,10 @@ fn main() {
     let input_file = File::open(input_file_arg).expect("Cannot open the input file!");
     let cards = BufReader::new(input_file);
 
-    let results: Vec<String> = cards
-        .lines()
-        .filter_map(|result| result.ok())
+    let results: Vec<String> = cards.lines().filter_map(|result| result.ok()).collect();
+
+    let results2: Vec<String> = results
+        .par_iter()
         .map(|card| {
             let validity = match validate(card.parse::<u64>().unwrap()) {
                 false => "invalid",
@@ -25,5 +27,5 @@ fn main() {
         .collect();
 
     let mut output = File::create(output_file_arg).expect("Cannot create output file!");
-    write!(output, "{}\n", results.join("\n"));
+    write!(output, "{}\n", results2.join("\n"));
 }
