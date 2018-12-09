@@ -37,7 +37,8 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-data/output_credit_cards.txt
+data/output*
+!data/input*
 
 # All javascript files
 *.js
