@@ -10,11 +10,13 @@ fn main() {
     let output_file_arg = &args[2];
 
     let input_file = File::open(input_file_arg).expect("Cannot open the input file!");
-    let cards = BufReader::new(input_file);
 
-    let results: Vec<String> = cards.lines().filter_map(|result| result.ok()).collect();
+    let cards: Vec<String> = BufReader::new(input_file)
+        .lines()
+        .filter_map(|result| result.ok())
+        .collect();
 
-    let results2: Vec<String> = results
+    let results: Vec<String> = cards
         .par_iter()
         .map(|card| {
             let validity = match validate(card.parse::<u64>().unwrap()) {
@@ -27,5 +29,5 @@ fn main() {
         .collect();
 
     let mut output = File::create(output_file_arg).expect("Cannot create output file!");
-    write!(output, "{}\n", results2.join("\n"));
+    write!(output, "{}\n", results.join("\n"));
 }
