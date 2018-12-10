@@ -35,4 +35,18 @@ fn main() {
     write!(output, "{}\n", results.join("\n"))
         .expect(&format!("Cannot wrtie output file: {}", output_file_arg));
     ()
+
+    // No parallel - not too bad performance!
+    // let mut result = String::new();
+    // cards.iter().for_each(|card| {
+    //     let validity = match validate(card.parse::<u64>().unwrap()) {
+    //         false => "invalid",
+    //         true => "valid",
+    //     };
+
+    //     result.push_str(&format!("MasterCard: {} ({})\n", card, validity));
+    // });
+
+    // let mut output = File::create(output_file_arg).expect("Cannot create output file!");
+    // write!(output, "{}\n", result).expect("Cannot write output file!")
 }
