@@ -9,7 +9,8 @@ fn main() {
     let input_file_arg = &args[1];
     let output_file_arg = &args[2];
 
-    let input_file = File::open(input_file_arg).expect("Cannot open the input file!");
+    let input_file = File::open(input_file_arg)
+        .expect(&format!("Cannot open the input file: {}", input_file_arg));
 
     let cards: Vec<String> = BufReader::new(input_file)
         .lines()
@@ -28,6 +29,10 @@ fn main() {
         })
         .collect();
 
-    let mut output = File::create(output_file_arg).expect("Cannot create output file!");
-    write!(output, "{}\n", results.join("\n"));
+    let mut output = File::create(output_file_arg)
+        .expect(&format!("Cannot create output file: {}", output_file_arg));
+
+    write!(output, "{}\n", results.join("\n"))
+        .expect(&format!("Cannot wrtie output file: {}", output_file_arg));
+    ()
 }
