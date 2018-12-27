@@ -25,7 +25,15 @@ fn main() {
                 true => "valid",
             };
 
-            format!("MasterCard: {} ({})", card, validity)
+            let card_type = match card {
+                x if (x.len() == 13 || x.len() == 16) && &x[..1] == "4" => "VISA",
+                x if x.len() == 16 && (&x[..2] == "51" || &x[..2] == "55") => "MasterCard",
+                x if x.len() == 16 && &x[..4] == "6011" => "Discover",
+                x if x.len() == 15 && (&x[..2] == "34" || &x[..2] == "37") => "AMEX",
+                _ => "Unknown",
+            };
+
+            format!("{}: {} ({})", card_type, card, validity)
         })
         .collect();
 
