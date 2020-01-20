@@ -79,7 +79,6 @@ Statistical profiling result from isolate-0x27906f0-v8.log, (820 ticks, 22 unacc
 ## Observations
 - I implemented this program in Elixir and while it was great fun it turned that Node.js was just as easy to implement for multi-core and a LOT faster at file streaming
 - There are 827 chunks in the input file which means 827 messages to worker processes
-- For me this has dispelled the myth that Node.js is not a good choice for CPU bound processing
 - Each new version of Node.js has made this program faster which is great to see!
 - Node.js has really fast file system IO thanks to C++ module goodness
 - TypeScript is great because I can target ES5 or ES6 easily, as of Node.js v9.0.0 performance is around the same
