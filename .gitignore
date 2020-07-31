@@ -37,10 +37,14 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-data/output_credit_cards.txt
+test-data/output*
+!test-data/input*
 
 # All javascript files
 *.js
 js/
 
 !mocha-global.js
+
+# Rust
+ccc-rust/target

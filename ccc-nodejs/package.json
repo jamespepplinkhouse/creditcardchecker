@@ -4,11 +4,14 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production node js/app.js data/input_credit_cards_large.txt data/output_credit_cards.txt",
-    "profile": "node --prof js/app.js data/input_credit_cards_large.txt data/output_credit_cards.txt",
+    "start":
+      "NODE_ENV=production node js/app.js ../test-data/input_credit_cards_large.txt ../test-data/output_credit_cards.txt",
+    "profile":
+      "node --prof js/app.js ../test-data/input_credit_cards_large.txt ../test-data/output_credit_cards.txt",
     "debug": "DEBUG=*.ts node js/app.js",
     "build": "rimraf js/* && tsc --sourcemap -p ts/",
-    "test": "npm run build && mocha --require mocha-global.js $(find js/ -name *.spec.js)"
+    "test":
+      "npm run build && mocha --require mocha-global.js $(find js/ -name *.spec.js)"
   },
   "author": "James Pepplinkhouse",
   "license": "MIT",
