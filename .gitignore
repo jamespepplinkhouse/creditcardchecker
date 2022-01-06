@@ -42,7 +42,7 @@ test-data/output*
 
 # All javascript files
 *.js
-js/
+build/
 
 !mocha-global.js
 

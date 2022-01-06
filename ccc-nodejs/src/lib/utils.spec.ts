@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { sliceChunk } from './utils'
 
 describe('utils', () => {
@@ -9,7 +8,7 @@ describe('utils', () => {
       tail: '11112222'
     }
 
-    expect(sliceChunk(chunk, '')).to.eql(expectedResult)
+    expect(sliceChunk(chunk, '')).toEqual(expectedResult)
   })
 
   it('sliceChunk() correctly handles last tail', () => {
@@ -20,6 +19,6 @@ describe('utils', () => {
       tail: '11112222'
     }
 
-    expect(sliceChunk(chunk, lastTail)).to.eql(expectedResult)
+    expect(sliceChunk(chunk, lastTail)).toEqual(expectedResult)
   })
 })

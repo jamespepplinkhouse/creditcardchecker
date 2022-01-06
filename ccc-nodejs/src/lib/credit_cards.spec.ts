@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { validateCards } from './credit_cards'
 
 describe('credit_cards', () => {
@@ -6,14 +5,14 @@ describe('credit_cards', () => {
     const cards = ['378282246310005']
     const cardDescriptions = ['AMEX: 378282246310005 (valid)']
 
-    expect(validateCards(cards)).to.eql(cardDescriptions)
+    expect(validateCards(cards)).toEqual(cardDescriptions)
   })
 
   it('Discover', () => {
     const cards = ['6011111111111117']
     const cardDescriptions = ['Discover: 6011111111111117 (valid)']
 
-    expect(validateCards(cards)).to.eql(cardDescriptions)
+    expect(validateCards(cards)).toEqual(cardDescriptions)
   })
 
   it('MasterCard', () => {
@@ -23,14 +22,14 @@ describe('credit_cards', () => {
       'MasterCard: 5105105105105106 (invalid)'
     ]
 
-    expect(validateCards(cards)).to.eql(cardDescriptions)
+    expect(validateCards(cards)).toEqual(cardDescriptions)
   })
 
   it('Unknown', () => {
     const cards = ['9111111111111111']
     const cardDescriptions = ['Unknown: 9111111111111111 (invalid)']
 
-    expect(validateCards(cards)).to.eql(cardDescriptions)
+    expect(validateCards(cards)).toEqual(cardDescriptions)
   })
 
   it('VISA', () => {
@@ -41,6 +40,6 @@ describe('credit_cards', () => {
       'VISA: 4012888888881881 (valid)'
     ]
 
-    expect(validateCards(cards)).to.eql(cardDescriptions)
+    expect(validateCards(cards)).toEqual(cardDescriptions)
   })
 })
