@@ -8,10 +8,13 @@
   },
   "scripts": {
     "start": "NODE_ENV=production node build/app.js ../test-data/input_credit_cards_large.txt ../test-data/output_credit_cards.txt",
-    "profile": "node --prof build/app.js ../test-data/input_credit_cards_large.txt ../test-data/output_credit_cards.txt",
     "debug": "DEBUG=*.ts node build/app.js",
     "compile": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "profile": "node --prof build/app.js ../test-data/input_credit_cards_large.txt ../test-data/output_credit_cards.txt",
+    "clinic:doctor": "clinic doctor -- node build/app.js ../test-data/input_credit_cards_large.txt ../test-data/output_credit_cards.txt",
+    "clinic:flame": "clinic flame -- node build/app.js ../test-data/input_credit_cards_large.txt ../test-data/output_credit_cards.txt",
+    "clinic:bubbleprof": "clinic bubbleprof -- node build/app.js ../test-data/input_credit_cards_large.txt ../test-data/output_credit_cards.txt"
   },
   "author": "James Pepplinkhouse",
   "license": "MIT",

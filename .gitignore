@@ -3,6 +3,7 @@
 *.pid
 *.seed
 *.txt
+.clinic
 .grunt
 .lock-wscript
 .node_repl_history
