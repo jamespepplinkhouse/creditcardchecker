@@ -1,46 +1,49 @@
 # Credit Card Checker (Node.js)
 
-This program validates and identifies credit card numbers by consuming an input file which has one credit card number per line. It writes the results into an output file with one credit card per line. This program is optimised for parsing large files as quickly as possible.
+## Approach
 
-I used this project to experiment with a multi-core Node.js solution and to run performance profiling. It's also a handy reference setup for TypeScript.
-
-Notes:
-- There is a sample input file (`data/input_credit_cards_large.txt`) with 3310000 test credit card numbers in it
-- For this exercise we expect that the input data is clean
-- The program must output one line for each input line
-- The program must correctly identify the brand and validity of each credit card number
-- Caching/memoization is not allowed - that's against the spirit of the exercise!
-- We are not required to write the output credit card numbers to match the input order
-- The goal is to process the input file as fast as possible using all CPUs
-
-## Commands
+## Usage
 
 ### Setup
+
 ```
-$ npm install typescript --global
-$ npm install
+$ yarn
 ```
 
 ### Start
+
 ```
-$ npm run compile
-$ npm start
+$ yarn compile
+$ yarn start
 ```
 
 ### Test
+
 ```
-$ npm test
+$ yarn test
+```
+
+### Clinic.js
+
+[Clinic.js is a really easy to use profiling toolkit for Node.js, check it out!](https://clinicjs.org/)
+
+```
+$ yarn clinic:doctor
+$ yarn clinic:flame
+$ yarn clinic:bubbleprof
 ```
 
 ### Profile
+
 ```
-$ npm run profile
+$ yarn profile
 $ ls isolate*
 $ node --prof-process isolate-0x27906f0-v8.log > profile.log
 $ cat profile.log
 ```
 
 Here's an example of what you get back:
+
 ```
 Statistical profiling result from isolate-0x27906f0-v8.log, (820 ticks, 22 unaccounted, 0 excluded).
 
@@ -68,39 +71,21 @@ Statistical profiling result from isolate-0x27906f0-v8.log, (820 ticks, 22 unacc
       2    0.2%    0.3%  LazyCompile: *isAmex /srv/git/creditcardchecker-node/js/lib/credit_cards.js:3:23
 ```
 
-*Note:* I am using Node v9.0.0 at the time of writing
-
+_Note:_ I am using Node v9.0.0 at the time of writing
 
 ## Performance Features
+
 - Streams the input file so that it can process very large files
 - Input stream allows the program to start processing and writing the output file before the input file is fully loaded
 - Processes cards in chunks in multiple Node.js processes to use all CPU cores
 
 ## Observations
+
 - I implemented this program in Elixir and while it was great fun it turned that Node.js was just as easy to implement for multi-core and a LOT faster at file streaming
 - There are 827 chunks in the input file which means 827 messages to worker processes
 - Each new version of Node.js has made this program faster which is great to see!
 - Node.js has really fast file system IO thanks to C++ module goodness
 - TypeScript is great because I can target ES5 or ES6 easily, as of Node.js v9.0.0 performance is around the same
-
-## Test Results
-To give you an idea, my first implementation took a couple of minutes (on older hardware, but still). It goes to show there is a lot of room for optimisation with Node.js if you need to squeeze out maxmimum performance!
-
-Here are results from three runs on my desktop - *Intel(R) Core(TM) i5-7600 CPU @ 3.50GHz with SSD*:
-
-```
-inputStream: 570.475ms
-chunkCount: 827
-program: 1064.385ms
-
-inputStream: 396.159ms
-chunkCount: 827
-program: 1088.752ms
-
-inputStream: 469.506ms
-chunkCount: 827
-program: 1073.485ms
-```
 
 ## Multi-Node Architecture
 
