@@ -16,13 +16,11 @@
   "author": "James Pepplinkhouse",
   "license": "MIT",
   "dependencies": {
-    "ramda": "^0.27.1",
     "worker-farm": "^1.7.0"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "@types/node": "16",
-    "@types/ramda": "^0.27.62",
     "jest": "^27.4.7",
     "prettier": "^2.5.1",
     "ts-jest": "^27.1.2",
